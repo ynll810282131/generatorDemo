@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alfred.mapper.CommodityMapper">
+  <resultMap id="BaseResultMap" type="com.alfred.domain.Commodity">
+    <id column="commodity_pk" jdbcType="INTEGER" property="commodityPk" />
+    <result column="commodity_id" jdbcType="VARCHAR" property="commodityId" />
+    <result column="commodity_name" jdbcType="VARCHAR" property="commodityName" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="commodity_type_id" jdbcType="VARCHAR" property="commodityTypeId" />
+    <result column="commodity_type_name" jdbcType="VARCHAR" property="commodityTypeName" />
+    <result column="commodity_picture" jdbcType="VARCHAR" property="commodityPicture" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="sale_point" jdbcType="VARCHAR" property="salePoint" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    commodity_pk, commodity_id, commodity_name, price, commodity_type_id, commodity_type_name, 
+    commodity_picture, flag, sale_point
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from commodity
+    where commodity_pk = #{commodityPk,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from commodity
+    where commodity_pk = #{commodityPk,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.alfred.domain.Commodity">
+    insert into commodity (commodity_pk, commodity_id, commodity_name, 
+      price, commodity_type_id, commodity_type_name, 
+      commodity_picture, flag, sale_point
+      )
+    values (#{commodityPk,jdbcType=INTEGER}, #{commodityId,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{commodityTypeId,jdbcType=VARCHAR}, #{commodityTypeName,jdbcType=VARCHAR}, 
+      #{commodityPicture,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER}, #{salePoint,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.alfred.domain.Commodity">
+    insert into commodity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commodityPk != null">
+        commodity_pk,
+      </if>
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+      <if test="commodityName != null">
+        commodity_name,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="commodityTypeId != null">
+        commodity_type_id,
+      </if>
+      <if test="commodityTypeName != null">
+        commodity_type_name,
+      </if>
+      <if test="commodityPicture != null">
+        commodity_picture,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="salePoint != null">
+        sale_point,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commodityPk != null">
+        #{commodityPk,jdbcType=INTEGER},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="commodityTypeId != null">
+        #{commodityTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityTypeName != null">
+        #{commodityTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPicture != null">
+        #{commodityPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="salePoint != null">
+        #{salePoint,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.alfred.domain.Commodity">
+    update commodity
+    <set>
+      <if test="commodityId != null">
+        commodity_id = #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="commodityTypeId != null">
+        commodity_type_id = #{commodityTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityTypeName != null">
+        commodity_type_name = #{commodityTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityPicture != null">
+        commodity_picture = #{commodityPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="salePoint != null">
+        sale_point = #{salePoint,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where commodity_pk = #{commodityPk,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.alfred.domain.Commodity">
+    update commodity
+    set commodity_id = #{commodityId,jdbcType=VARCHAR},
+      commodity_name = #{commodityName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      commodity_type_id = #{commodityTypeId,jdbcType=VARCHAR},
+      commodity_type_name = #{commodityTypeName,jdbcType=VARCHAR},
+      commodity_picture = #{commodityPicture,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER},
+      sale_point = #{salePoint,jdbcType=VARCHAR}
+    where commodity_pk = #{commodityPk,jdbcType=INTEGER}
+  </update>
+</mapper>

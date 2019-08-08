@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alfred.mapper.CommodityInfoMapper">
+  <resultMap id="BaseResultMap" type="com.alfred.domain.CommodityInfo">
+    <id column="commodity_info_pk" jdbcType="INTEGER" property="commodityInfoPk" />
+    <result column="commodity_id" jdbcType="VARCHAR" property="commodityId" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.alfred.domain.CommodityInfo">
+    <result column="commodity_info" jdbcType="LONGVARCHAR" property="commodityInfo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    commodity_info_pk, commodity_id, flag
+  </sql>
+  <sql id="Blob_Column_List">
+    commodity_info
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from commodity_info
+    where commodity_info_pk = #{commodityInfoPk,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from commodity_info
+    where commodity_info_pk = #{commodityInfoPk,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.alfred.domain.CommodityInfo">
+    insert into commodity_info (commodity_info_pk, commodity_id, flag, 
+      commodity_info)
+    values (#{commodityInfoPk,jdbcType=INTEGER}, #{commodityId,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER}, 
+      #{commodityInfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.alfred.domain.CommodityInfo">
+    insert into commodity_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commodityInfoPk != null">
+        commodity_info_pk,
+      </if>
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+      <if test="flag != null">
+        flag,
+      </if>
+      <if test="commodityInfo != null">
+        commodity_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commodityInfoPk != null">
+        #{commodityInfoPk,jdbcType=INTEGER},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="commodityInfo != null">
+        #{commodityInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.alfred.domain.CommodityInfo">
+    update commodity_info
+    <set>
+      <if test="commodityId != null">
+        commodity_id = #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="commodityInfo != null">
+        commodity_info = #{commodityInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where commodity_info_pk = #{commodityInfoPk,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.alfred.domain.CommodityInfo">
+    update commodity_info
+    set commodity_id = #{commodityId,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER},
+      commodity_info = #{commodityInfo,jdbcType=LONGVARCHAR}
+    where commodity_info_pk = #{commodityInfoPk,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.alfred.domain.CommodityInfo">
+    update commodity_info
+    set commodity_id = #{commodityId,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER}
+    where commodity_info_pk = #{commodityInfoPk,jdbcType=INTEGER}
+  </update>
+</mapper>
